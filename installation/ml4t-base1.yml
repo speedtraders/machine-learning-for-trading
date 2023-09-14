@@ -1,4 +1,4 @@
-name: ml4t1
+name: ml4t
 channels:
   - conda-forge
   - defaults
