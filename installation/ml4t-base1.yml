@@ -1,0 +1,18 @@
+name: ml4t1
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+  - bashtage
+  - ranaroussi
+  - powerai
+  - fastai
+  - jiayi_anaconda
+  - districtdatalabs
+dependencies:
+  - jupyter
+  - pandas
+  - python=3.8
+  - scikit-learn
+  - tqdm
+  - zipline-reloaded
