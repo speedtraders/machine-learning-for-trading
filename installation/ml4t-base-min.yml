@@ -1,0 +1,32 @@
+name: ml4t
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - alphalens-reloaded
+  - bokeh
+  - furl
+  - gensim
+  - gym
+  - imageio
+  - lightgbm
+  - linearmodels
+  - logbook
+  - matplotlib
+  - nltk
+  - pandas
+  - pandas-datareader
+  - pyfolio-reloaded
+  - pykalman
+  - pymc3
+  - python-dateutil
+  - scikit-learn
+  - scrapy
+  - selenium
+  - spacy
+  - tensorflow
+  - tqdm
+  - trading-calendars
+  - yfinance
+  - zipline-reloaded=3.0.3
+prefix: /home/isaak/miniconda3/envs/ml4t

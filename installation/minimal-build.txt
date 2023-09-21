@@ -1,0 +1,39 @@
+Minimal environment build for ml4t based on actual package imports in notebooks and scripts.
+
+At the root of the repo execute:
+$ find . -name "*.ipynb" -exec jupyter nbconvert --to script {} \;
+$ pipreqs
+
+The generated requirements.txt includes all found imported packages.
+
+
+If we skip backtrader (we will start with zipline-reloaded) and scrapy-splash (it is used for scraping JS enabled sites and requires python 3.8) packages then we can simplify the enviroment.
+
+
+backtrader is used in:
+~/src/machine-learning-for-tradin-old$ find . -name "*.ipynb" -exec grep -H backtrader {} \;
+./09_time_series_models/07_pairs_trading_backtest.ipynb:    "import backtrader as bt\n",
+./09_time_series_models/07_pairs_trading_backtest.ipynb:    "from backtrader.feeds import PandasData\n",
+./08_ml4t_workflow/04_ml4t_workflow_with_zipline/02_backtesting_with_zipline.ipynb:    "The goal is to combine the daily return predictions with the OHCLV data from our Quandl bundle and then to go long on up to 10 equities with the highest predicted returns and short on those with the lowest predicted returns, requiring at least five stocks on either side similar to the backtrader example above. See comments in the notebook for implementation details."
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "import backtrader as bt\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "from backtrader.feeds import PandasData\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "# figure.savefig(f'backtrader.png')"
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "returns.to_hdf('backtrader.h5', 'returns')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "positions.to_hdf('backtrader.h5', 'positions')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "transactions.to_hdf('backtrader.h5', 'transactions/')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "gross_lev.to_hdf('backtrader.h5', 'gross_lev')"
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "returns = pd.read_hdf('backtrader.h5', 'returns')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "positions = pd.read_hdf('backtrader.h5', 'positions')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "transactions = pd.read_hdf('backtrader.h5', 'transactions/')\n",
+./08_ml4t_workflow/03_backtesting_with_backtrader.ipynb:    "gross_lev = pd.read_hdf('backtrader.h5', 'gross_lev')"
+
+scrapy-splash is used in:
+~/src/machine-learning-for-tradin-old$ find . -name "*.py" -exec grep -H scrapy_splash {} \;
+./03_alternative_data/01_opentable/opentable/spiders/table_spider.py:from scrapy_splash import SplashRequest
+./03_alternative_data/01_opentable/opentable/settings.py:    'scrapy_splash.SplashCookiesMiddleware'                                 : 723,
+./03_alternative_data/01_opentable/opentable/settings.py:    'scrapy_splash.SplashMiddleware'                                        : 725,
+./03_alternative_data/01_opentable/opentable/settings.py:    'scrapy_splash.SplashDeduplicateArgsMiddleware'  : 100,
+./03_alternative_data/01_opentable/opentable/settings.py:DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+./03_alternative_data/01_opentable/opentable/settings.py:HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+
