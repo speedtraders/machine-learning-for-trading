@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -20,10 +20,7 @@ X_test = np.array(range(len(X_train), len(df))).reshape(-1, 1)
 
 print(f'Len of train: {len(X_train)} \n len of test: {len(X_test)}')
 
-reg = GradientBoostingRegressor(n_estimators=600,
-                                max_depth=5,
-                                learning_rate=0.01,
-                                min_samples_split=3)
+reg = LinearRegression()
 
 reg.fit(X_train, y_train)
 
